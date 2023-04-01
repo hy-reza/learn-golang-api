@@ -21,6 +21,15 @@ func NewBookHandler(bookService service.Service) *bookHandler {
 	return &bookHandler{bookService}
 }
 
+func ResponseConverter(b model.Book) types.BookResponse {
+	return types.BookResponse{
+		ID:     b.ID,
+		Author: b.Author,
+		Desc:   b.Desc,
+		Title:  b.Title,
+	}
+}
+
 func (h *bookHandler) CreateBookHandler(ctx *gin.Context) {
 	var bookRequest types.BookRequest
 
@@ -56,6 +65,7 @@ func (h *bookHandler) CreateBookHandler(ctx *gin.Context) {
 		"data":   bookResponse,
 	})
 }
+
 func (h *bookHandler) UpdateBookHandler(ctx *gin.Context) {
 	var bookRequest types.BookRequest
 
@@ -138,15 +148,6 @@ func (h *bookHandler) GetBookHandler(ctx *gin.Context) {
 		"msg":    "successfully get a book !",
 		"status": "success",
 	})
-}
-
-func ResponseConverter(b model.Book) types.BookResponse {
-	return types.BookResponse{
-		ID:     b.ID,
-		Author: b.Author,
-		Desc:   b.Desc,
-		Title:  b.Title,
-	}
 }
 
 func (h *bookHandler) DeleteBookHandler(ctx *gin.Context) {
