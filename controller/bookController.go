@@ -73,6 +73,7 @@ func (h *bookHandler) UpdateBookHandler(ctx *gin.Context) {
 
 	id, _ := strconv.Atoi(idString)
 	err := ctx.ShouldBindJSON(&bookRequest)
+
 	if err != nil {
 		// ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		// return
